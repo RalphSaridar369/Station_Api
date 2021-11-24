@@ -10,7 +10,8 @@ router.get('/UserState',UserController.GetSpecificUsersByState);
 router.post('/Signup',UserController.SignUp);
 router.post('/Login',UserController.Login);
 router.post('/Logout', authCheckToken.checkAuth, UserController.Login);
-router.put('/', authCheckToken.checkAuth, UserController.UpdateProfile);
+router.patch('/', authCheckToken.checkAuth(4), UserController.UpdateProfile);
 router.delete('/', authCheckToken.checkAuth, UserController.DeleteProfile);
+router.post('/Bulk-Signup',authCheckToken.checkAuth(2), UserController.upload.single('file'),UserController.BulkUpload);
 
 module.exports=router;
